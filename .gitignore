@@ -1,0 +1,5 @@
+# Ignore addons folder
+addons/
+main/p5.dom.js
+main/p5.js
+main/p5.sound.js
