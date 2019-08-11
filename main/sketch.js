@@ -8,24 +8,24 @@ var dayLabelYPadding = 15;
 
 var dateX = 0;
 
+// TODO: add circle vis (make sure to square root value to calculate area)
+// sqrt(val) then use p5 map to map a range of circles diameters
+
 // Starting Positions
 let dateY = 150;
-let startingX = 130;
+let startingX = 100;
 
 var startingY; // for day names, dont change
 
 var calendarPadding = 5;
-//monday = padding, tuesday = padding + size of one, wednesday = padding + size of 2 etc.//
-var dateSize = 40;
+var dateSize = 80;
 var currentMonth;
 var currentYear;
-//TODO: Make first box (default dateX, dateY) start at
-// corresponding month start day (mon, sun, etc.)
 
 function setup() {
   startingY = dateY;
 
-  createCanvas(600,600);
+  createCanvas(800,800);
   background(200);
   setDayOfWeek();
 
@@ -43,7 +43,7 @@ function setup() {
     days[1] = 29;
   }
 
-  // instantiate dates
+  // instantiate dates in current month
   for(let i = 0; i < days[currentMonth]; i++) {
     dates.push(new myDate());
     dateX += dateSize + calendarPadding;  // X Spacing
@@ -64,15 +64,18 @@ function draw() {
   }
   // Draw day labels
   var textPadding = calendarPadding + dateSize/2; // Set initial day padding
-  var daySize = 6;  // Set text size
+  var daySize = 10;  // Set text font size
+
   for(let i = 0; i < dayNames.length; i++){
     textAlign(CENTER, CENTER);
     textSize(daySize);
     text(dayNames[i], startingX + textPadding, startingY - dayLabelYPadding);
     textPadding += dateSize + calendarPadding;
   }
-  // day label/calendar line // padding for line should be calendarPadding*2
-  line(startingX + calendarPadding, startingY, dateSize*7 + calendarPadding*7 + startingX, startingY);
+
+  stroke(0,0,0,100);  // Give line some opacity
+  line(startingX + calendarPadding - calendarPadding*2, startingY - calendarPadding, dateSize*7 + calendarPadding*7 + startingX + calendarPadding*2, startingY - calendarPadding);
+  pop();
 }
 
 class myDate{
@@ -82,8 +85,8 @@ class myDate{
   }
   display(d) {
     textAlign(LEFT, TOP);
-    textSize(6);
-    //noStroke();
+    textSize(8);
+    noStroke();
     rect(this.x, this.y, dateSize, dateSize);
     text(d, this.x + dayNumberLabelPadding, this.y + dayNumberLabelPadding);
   }
