@@ -54,7 +54,7 @@ function setup() {
       dateY += dateSize + calendarPadding;  // dateSize to add new column
     }
   }
-  noLoop(); // Stop looping (Refactor this code later :P)
+  noLoop();
 }
 
 function draw() {
@@ -116,7 +116,7 @@ function setDayOfWeek()
       dateX += dateSize*4 + calendarPadding*4;
       break;
 
-    case 5: // Friday
+    case 5: // friday
       dateX += dateSize*5 + calendarPadding*5;
       break;
 
