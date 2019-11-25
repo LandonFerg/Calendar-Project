@@ -8,14 +8,11 @@ var dayLabelYPadding = 15;
 
 var dateX = 0;
 
-// TODO: add circle vis (make sure to square root value to calculate area)
-// sqrt(val) then use p5 map to map a range of circles diameters
-
 // Starting Positions
 let dateY = 150;
 let startingX = 100;
 
-var startingY; // for day names, dont change
+var startingY; // For day names
 
 var calendarPadding = 5;
 var dateSize = 80;
@@ -29,7 +26,7 @@ function setup() {
   background(200);
   setDayOfWeek();
 
-  // set initial positions
+  // Set initial positions
   dateX += calendarPadding + startingX;
   dateY += calendarPadding;
 
@@ -43,7 +40,7 @@ function setup() {
     days[1] = 29;
   }
 
-  // instantiate dates in current month
+  // Instantiate dates in current month
   for(let i = 0; i < days[currentMonth]; i++) {
     dates.push(new myDate());
     dateX += dateSize + calendarPadding;  // X Spacing
@@ -90,7 +87,6 @@ class myDate{
     text(d, this.x + dayNumberLabelPadding, this.y + dayNumberLabelPadding);
     if(d == new Date().getDate()) // Current date
     {
-      console.log("SHOULD DRAW CIRCLE NOW");
       push();
       fill(230,110,70); // Orange
       rect(this.x, this.y, dateSize, dateSize); // Rerender date
