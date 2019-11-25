@@ -58,6 +58,9 @@ function setup() {
 }
 
 function draw() {
+
+  console.log(currentMonth);
+  console.log(currentYear);
   // Display dates in loop
   for(let i = 0; i < dates.length; i++) {
     dates[i].display(i+1);
@@ -92,10 +95,11 @@ class myDate{
   }
 }
 
+// Gets 1st day of the month and sets initial position
 function setDayOfWeek()
 {
-  switch(new Date().getDay()){
-
+  var firstDate = new Date(new Date().getFullYear(), new Date().getMonth());
+  switch(firstDate.getDay()){
     case 0: // sunday
       dateX = dateX;
       break;
