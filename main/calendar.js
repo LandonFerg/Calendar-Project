@@ -47,7 +47,7 @@ function setup() {
   for(let i = 0; i < days[currentMonth]; i++) {
     dates.push(new myDate());
     dateX += dateSize + calendarPadding;  // X Spacing
-    if(dateX > dateSize*7 + calendarPadding*7 + startingX) // 7s here for 7 days of the week
+    if(dateX > dateSize*7 + calendarPadding*7 + startingX) // 7s here for 7 days of the week per row
     {
       // 0 Axis
       dateX = startingX + calendarPadding;
@@ -58,16 +58,13 @@ function setup() {
 }
 
 function draw() {
-
-  console.log(currentMonth);
-  console.log(currentYear);
   // Display dates in loop
   for(let i = 0; i < dates.length; i++) {
     dates[i].display(i+1);
   }
   // Draw day labels
   var textPadding = calendarPadding + dateSize/2; // Set initial day padding
-  var daySize = 10;  // Set text font size
+  var daySize = 12;  // Set text font size
 
   for(let i = 0; i < dayNames.length; i++){
     textAlign(CENTER, CENTER);
@@ -78,7 +75,6 @@ function draw() {
 
   stroke(0,0,0,100);  // Give line some opacity
   line(startingX + calendarPadding - calendarPadding*2, startingY - calendarPadding, dateSize*7 + calendarPadding*7 + startingX + calendarPadding*2, startingY - calendarPadding);
-  pop();
 }
 
 class myDate{
@@ -88,10 +84,20 @@ class myDate{
   }
   display(d) {
     textAlign(LEFT, TOP);
-    textSize(8);
+    textSize(12);
     noStroke();
     rect(this.x, this.y, dateSize, dateSize);
     text(d, this.x + dayNumberLabelPadding, this.y + dayNumberLabelPadding);
+    if(d == new Date().getDate()) // Current date
+    {
+      console.log("SHOULD DRAW CIRCLE NOW");
+      push();
+      fill(230,110,70); // Orange
+      rect(this.x, this.y, dateSize, dateSize); // Rerender date
+      fill(0,0,0);
+      text(d, this.x + dayNumberLabelPadding, this.y + dayNumberLabelPadding); // Rerender text
+      pop();
+    }
   }
 }
 
