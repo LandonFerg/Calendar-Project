@@ -8,8 +8,8 @@ var dayLabelYPadding = 15;
 
 var dateX = 0;
 
-// Starting Positions
-let dateY = 150;
+// X & Y for calendar position
+let dateY = 200;
 let startingX = 100;
 
 var startingY; // For day names
@@ -21,7 +21,7 @@ var currentYear;
 
 function setup() {
   startingY = dateY;
-  
+
   var cnv = createCanvas(800,800);
   var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
@@ -73,6 +73,10 @@ function draw() {
     text(dayNames[i], startingX + textPadding, startingY - dayLabelYPadding);
     textPadding += dateSize + calendarPadding;
   }
+
+  textSize(42);
+  text(months[new Date().getMonth()], width/2,startingY - 80);
+
 
   stroke(0,0,0,100);  // Give line some opacity
   line(startingX + calendarPadding - calendarPadding*2, startingY - calendarPadding, dateSize*7 + calendarPadding*7 + startingX + calendarPadding*2, startingY - calendarPadding);
